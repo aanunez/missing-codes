@@ -1,8 +1,9 @@
 <?php
 /**
-    This hook will put missing item buttons under a text field. 
-    Clicking one of these will put a code in the text box and lock it. 
-    Clicking again will blank the text box and unlock it.
+    This hook can be used to place buttons below a text or notes field to
+    populate (and lock) the field with predetermined coded values 
+    representing "Missing", "Don't know" etc. Clicking again will blank the
+    text box and unlock it.
     
     Syntax is @MISSINGCODE=NA,PF,RF,DC,DK,MS
     
@@ -13,8 +14,6 @@
     DK | Don't Know           | -8
     MS | Missing              | -9
     
-    To add additional codes or change the mapping edit 
-    "const prefixList" and "const codings"
 **/
 
 $term = '@MISSINGCODE';
