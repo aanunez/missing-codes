@@ -92,13 +92,14 @@
                         </li>
                         <li>
                             <b>Examples</b><br>
-                            <i>Action Tags / Field Annotation</i><br>
-                            <pre>@MISSINGCODE=DK,PF
-                            //Insert picture here</pre>
-                            <pre>@MISSINGCODE=NA
-                            //Insert picture here</pre>
-                            <pre>@MISSINGCODE=DC,NA @CHARLIMIT=4
-                            //Insert picture here</pre>
+                            <pre>@MISSINGCODE=DK,PF</pre>
+                            <img src="https://uwmadison.box.com/shared/static/gu7ilxa1k09midn2zteiz08rvfxbqtat.png">
+                            <br></br>
+                            <pre>@MISSINGCODE=DC,NA @CHARLIMIT=4</pre>
+                            <img src="https://uwmadison.box.com/shared/static/2vnss7jdae02782yxzs3hjl8j5a8xz6d.png">
+                            <br></br>
+                            <pre>@DEFAULT="The Hitchhiker's Guide to The Galaxy" @MISSINGCODE=DK,RF</pre>
+                            <img src="https://uwmadison.box.com/shared/static/nwrbkfb3c168wje3clqzprnrcszrp06h.png">
                         </li>
                     </ul>
                 </div>
@@ -112,6 +113,7 @@
                         <li>The buttons created by this action tag do not display on the "preview instrument" page  </li>
                         <li>The action tag <b>does not respect the "@READONLY" action tag</b>. As such the two tags should not be used in combination with one another.</li>
                         <li>When used with the "@CHARLIMIT" action tag, "@MISSINGCODE" must be first. This is recognized as a bug and is being investigated. </li>
+                        <li><b>Major: </b>I have not yet decided if the coded values will be end-user changeable. Adding that will require some amount of dev. Otherwise this plugin is near-complete and ready for testing.</li>
                     </ul> 
                 </div>
             </div>
