@@ -24,8 +24,16 @@ Only ./framework/resources/missingCodes.php contains unique code, the rest is th
 
 * The buttons do not display on the "preview instrument" page
 * The tag DOES work on Notes fields
-* When mixing with "@CHARLIMIT", "@MISSINGCODE" must be first (bug?)
+* When mixing with "@CHARLIMIT", "@MISSINGCODE" must be first
 * The buttons do not respect the "@READONLY" tag
+
+## To Do
+
+* CHARLIMIT bug
+* Update docs to reflect validation changes
+* Everything but Phone & custom fv should work
+* Handle user defined code values
+* rename?
 
 ## Install
 
