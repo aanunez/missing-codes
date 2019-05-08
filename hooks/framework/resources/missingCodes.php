@@ -7,12 +7,13 @@
     
     Syntax is @MISSINGCODE=NA,PF,RF,DC,DK,MS
     
-    NA | Not Applicable       | -6
-    PF | Prefer not to answer | -7
-    RF | Refused              | -7
-    DC | Declined             | -7
-    DK | Don't Know           | -8
-    MS | Missing              | -9
+                                num      zip            email         time    phone     date
+    NA | Not Applicable       | -6  | 99999-0006 | na@fake.wisc.edu | 00:00 |   X   | 01/01/1900
+    PF | Prefer not to answer | -7  | 99999-0007 | pf@fake.wisc.edu | 00:00 |   X   | 01/01/1901
+    RF | Refused              | -7  | 99999-0007 | rf@fake.wisc.edu | 00:00 |   X   | 01/01/1901
+    DC | Declined             | -7  | 99999-0007 | dc@fake.wisc.edu | 00:00 |   X   | 01/01/1901
+    DK | Don't Know           | -8  | 99999-0008 | dk@fake.wisc.edu | 00:00 |   X   | 01/01/1902
+    MS | Missing              | -9  | 99999-0009 | ms@fake.wisc.edu | 00:00 |   X   | 01/01/1903
     
 **/
 
@@ -46,6 +47,10 @@ $startup_vars = $hook_functions[$term];
     .fieldDisabled {
         background-color: #CECECE;
     }
+    .missingCodeButton {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
 </style>
 <script type='text/javascript'>
 function missingCodeClicked(missingItem, field, code) {
@@ -72,24 +77,75 @@ function missingCodeClicked(missingItem, field, code) {
 $(document).ready(function() {
     var affected_fields = <?php print json_encode($startup_vars) ?>;
     $.each(affected_fields, function(field,args) {
-        const template = '<button id="MC_FLD" class="btn btn-defaultrc btn-xs fsl1 CHKD" type="button" onclick="missingCodeClicked(\'MC\',\'FLD\',\'CODE\')">TITLE</button>';
-        const coding = [ {sym:"NA",code:-6,text:"Not Applicable"},
-                         {sym:"PF",code:-7,text:"Prefer not to answer"},
-                         {sym:"RF",code:-7,text:"Refused"},
-                         {sym:"DC",code:-7,text:"Declined"},
-                         {sym:"DK",code:-8,text:"Don't Know"},
-                         {sym:"MS",code:-9,text:"Missing"} ]
+        var codeStr;
+        const template = '<div class="missingCodeButton"><button id="MC_FLD" class="btn btn-defaultrc btn-xs fsl1 CHKD" type="button" onclick="missingCodeClicked(\'MC\',\'FLD\',\'CODE\')">TITLE</button></div>';
+        const coding = [ {sym:"NA",code:-6,zipcode:"99999-0006",email:"na@fake.wisc.edu",time:"00:00",date:"01/01/1906",phone:"",text:"Not Applicable"},
+                         {sym:"PF",code:-7,zipcode:"99999-0007",email:"pf@fake.wisc.edu",time:"00:00",date:"01/01/1907",phone:"",text:"Prefer not to answer"},
+                         {sym:"RF",code:-7,zipcode:"99999-0007",email:"rf@fake.wisc.edu",time:"00:00",date:"01/01/1907",phone:"",text:"Refused"},
+                         {sym:"DC",code:-7,zipcode:"99999-0007",email:"dc@fake.wisc.edu",time:"00:00",date:"01/01/1907",phone:"",text:"Declined"},
+                         {sym:"DK",code:-8,zipcode:"99999-0008",email:"dk@fake.wisc.edu",time:"00:00",date:"01/01/1908",phone:"",text:"Don't Know"},
+                         {sym:"MS",code:-9,zipcode:"99999-0009",email:"ms@fake.wisc.edu",time:"00:00",date:"01/01/1909",phone:"",text:"Missing"} ]
         $.each(coding, function(_,codeObj) { 
             if( args.params.indexOf(codeObj.sym)>-1 ) {
-                insertCode = template.replace(/MC/g, codeObj.sym).replace(/FLD/g, field).replace(/TITLE/g, codeObj.text).replace(/CODE/g, codeObj.code);
-                if ($('[name="' + field + '"]').val() == codeObj.code) {
+                insertCode = template.replace(/MC/g, codeObj.sym).replace(/FLD/g, field).replace(/TITLE/g, codeObj.text);
+               
+                // Replace w/ correct code (if validation is on)
+                codeStr = codeObj.code;
+                if( (typeof $('[name="' + field + '"]').attr("fv") !== 'undefined') ) {
+                    switch( $('[name="' + field + '"]').attr("fv") ) {
+                        case "zipcode":
+                        case "time":
+                        case "email":
+                        case "phone":
+                            codeStr = codeObj[$('[name="' + field + '"]').attr("fv")];
+                        break;
+                        case "int":
+                        case "float":
+                            //Nothing to do
+                        break;
+                        case "date_mdy":
+                        case "date_dmy":
+                            codeStr = codeObj.date;
+                        break;
+                        case "datetime_mdy":
+                        case "datetime_dmy":
+                            codeStr = codeObj.date + " " + codeObj.time;
+                        break;
+                        case "datetime_seconds_mdy":
+                        case "datetime_seconds_dmy":
+                            codeStr = codeObj.date + " " + codeObj.time + ":00";
+                        break;
+                        case "date_ymd":
+                            codeStr = codeObj.date.substr(6) + "/" + codeObj.date.substr(0,5);
+                        break;
+                        case "datetime_ymd":
+                            codeStr = codeObj.date.substr(6) + "/" + codeObj.date.substr(0,5) + " " + codeObj.time;
+                        break;
+                        case "datetime_seconds_ymd":
+                            codeStr = codeObj.date.substr(6) + "/" + codeObj.date.substr(0,5) + " " + codeObj.time + ":00";
+                        break;
+                        case:
+                            codeStr = ""
+                    }
+                }
+                insertCode = insertCode.replace(/CODE/g, codeStr);
+                
+                // Check if the button is set to the coded value
+                if ($('[name="' + field + '"]').val() == codeStr) {
                     insertCode = insertCode.replace(/CHKD/g, "stateSelected");
                     $('[name="' + field + '"]').prop('readonly', true);
                     $('[name="' + field + '"]').addClass("fieldDisabled");
                 }
                 else 
                     insertCode = insertCode.replace(/CHKD/g, "");
-                $('[name="' + field + '"]').after(insertCode);   
+                
+                // Insert for Date/Time
+                if( (typeof $('[name="' + field + '"]').attr("fv") !== 'undefined') && 
+                    ($('[name="' + field + '"]').attr("fv").startsWith("date") || $('[name="' + field + '"]').attr("fv").startsWith("time") ))
+                    $('[name="' + field + '"]').nextAll('[class="df"]').after(insertCode);
+                // Insert for all others
+                else
+                    $('[name="' + field + '"]').after(insertCode);
             }
         });
     });
