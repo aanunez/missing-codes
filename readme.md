@@ -1,4 +1,3 @@
-
 ## What it is
 
 This plugin adds the @MISSINGCODE action tag. Zero configuration is needed for end-users. 
@@ -31,6 +30,7 @@ Only ./framework/resources/missingCodes.php contains unique code, the rest is th
 
 ## To Do
 
+* Change dates to use 01/01/0001?
 * When mixing with "@CHARLIMIT", "@MISSINGCODE" must be first
 * Handle user defined code values
 * rename?

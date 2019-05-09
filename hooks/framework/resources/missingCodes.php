@@ -101,8 +101,8 @@ $(document).ready(function() {
                         case "phone":
                             codeStr = codeObj[$('[name="' + field + '"]').attr("fv")];
                         break;
-                        case "int":
-                        case "float":
+                        case "number":
+                        case "integer":
                             //Nothing to do
                         break;
                         case "date_mdy":
@@ -126,7 +126,7 @@ $(document).ready(function() {
                         case "datetime_seconds_ymd":
                             codeStr = codeObj.date.substr(6) + "/" + codeObj.date.substr(0,5) + " " + codeObj.time + ":00";
                         break;
-                        case:
+                        default:
                             codeStr = ""    
                     }
                 }
@@ -149,6 +149,7 @@ $(document).ready(function() {
                 // Insert for all others
                 else
                     $('[name="' + field + '"]').after(insertCode);
+                    //console.log("Pass")
             }
         });
     });

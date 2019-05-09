@@ -27,28 +27,62 @@ global $hook_functions;
 // THIS IS AN ARRY OF FILES TO INCLUDE AT THE END OF THE SCRIPT
 $includes = array();
 
-// START redcap_survey_page_top
-if ($hook_event == 'redcap_survey_page_top') {
-} // END redcap_survey_page_top
-
 // START redcap_data_entry_form OR redcap_survey_page
 if ($hook_event == 'redcap_data_entry_form' || $hook_event == 'redcap_survey_page') {
     $includes[] = HOOK_PATH_RESOURCES."missingCodes.php";
 } // END redcap_data_entry_form OR redcap_survey_page
 
+// START redcap_add_edit_records_page
+if ($hook_event == 'redcap_add_edit_records_page') {
+} // END redcap_add_edit_records_page
+
+// START redcap_control_center
+if ($hook_event == 'redcap_control_center') {
+} // END redcap_control_center
+
+// START redcap_custom_verify_username
+if ($hook_event == 'redcap_custom_verify_username') {
+} // END redcap_custom_verify_username
+
+// START redcap_data_entry_form
 if ($hook_event == 'redcap_data_entry_form') {
-} // END redcap_data_entry_form only
+} // END redcap_data_entry_form
 
-if ($hook_event == 'redcap_survey_page') {
-} // END redcap_survey_page only
+// START redcap_data_entry_form_top
+if ($hook_event == 'redcap_data_entry_form_top') {
+} // END redcap_data_entry_form_top
 
-// Enable the redcap_user_rights hook globally
-if ($hook_event == 'redcap_user_rights') {
-} // END redcap_user_rights
+// START redcap_every_page_before_render
+if ($hook_event == 'redcap_every_page_before_render') {
+} // END redcap_every_page_before_render
 
-// Enable the redcap_every_page_top hook globally
+// START redcap_every_page_top
 if ($hook_event == 'redcap_every_page_top') {
 } // END redcap_every_page_top
+
+// START redcap_project_home_page
+if ($hook_event == 'redcap_project_home_page') {
+} // END redcap_project_home_page
+
+// START redcap_save_record
+if ($hook_event == 'redcap_save_record') {
+} // END redcap_save_record
+
+// START redcap_survey_complete
+if ($hook_event == 'redcap_survey_complete') {
+} // END redcap_survey_complete
+
+// START redcap_survey_page
+if ($hook_event == 'redcap_survey_page') {
+} // END redcap_survey_page
+
+// START redcap_survey_page_top
+if ($hook_event == 'redcap_survey_page_top') {
+} // END redcap_survey_page_top
+
+// START redcap_user_rights
+if ($hook_event == 'redcap_user_rights') {
+} // END redcap_user_rights
 
 // INCLUDE ALL OF THE RESOURCES SPECIFIED GLOBALLY
 foreach($includes as $file) {
