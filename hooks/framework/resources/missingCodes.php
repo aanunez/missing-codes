@@ -3,18 +3,20 @@
     This hook can be used to place buttons below a text or notes field to
     populate (and lock) the field with predetermined coded values 
     representing "Missing", "Don't know" etc. Clicking again will blank the
-    text box and unlock it.
+    text box and unlock it. The codes used are determined by the field
+    validation that is used, if any. "Integer" and "Number" validation are
+    treated as though they had none.
     
     Syntax is @MISSINGCODE=NA,PF,RF,DC,DK,MS
     
-                                num      zip            email         time    phone     date
+                                none      zip           email         time    phone     date
     NA | Not Applicable       | -6  | 99999-0006 | na@fake.wisc.edu | 00:00 |   X   | 01/01/1900
     PF | Prefer not to answer | -7  | 99999-0007 | pf@fake.wisc.edu | 00:00 |   X   | 01/01/1901
     RF | Refused              | -7  | 99999-0007 | rf@fake.wisc.edu | 00:00 |   X   | 01/01/1901
     DC | Declined             | -7  | 99999-0007 | dc@fake.wisc.edu | 00:00 |   X   | 01/01/1901
     DK | Don't Know           | -8  | 99999-0008 | dk@fake.wisc.edu | 00:00 |   X   | 01/01/1902
     MS | Missing              | -9  | 99999-0009 | ms@fake.wisc.edu | 00:00 |   X   | 01/01/1903
-    
+
 **/
 
 $term = '@MISSINGCODE';
@@ -125,7 +127,7 @@ $(document).ready(function() {
                             codeStr = codeObj.date.substr(6) + "/" + codeObj.date.substr(0,5) + " " + codeObj.time + ":00";
                         break;
                         case:
-                            codeStr = ""
+                            codeStr = ""    
                     }
                 }
                 insertCode = insertCode.replace(/CODE/g, codeStr);
@@ -143,6 +145,7 @@ $(document).ready(function() {
                 if( (typeof $('[name="' + field + '"]').attr("fv") !== 'undefined') && 
                     ($('[name="' + field + '"]').attr("fv").startsWith("date") || $('[name="' + field + '"]').attr("fv").startsWith("time") ))
                     $('[name="' + field + '"]').nextAll('[class="df"]').after(insertCode);
+
                 // Insert for all others
                 else
                     $('[name="' + field + '"]').after(insertCode);

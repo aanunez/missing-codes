@@ -22,7 +22,7 @@
                     Purpose
                 </div>
                 <div class="panel-body">
-                    This new action tag allows you to add buttons below a text or notes field with options such as "Missing" or "Don't know". These buttons, when selected, will disable entry on the box and populate it with a predetermined code. Available options include ...
+                    This new action tag allows you to add buttons below a text or notes field with options such as "Missing" or "Don't know". These buttons, when selected, will disable entry on the box and populate it with an appropriate coded value determined by the validation, if any, used on the field. Available options include ...
                     <ul>
                         <li>Not Applicable  </li>
                         <li>Prefer not to answer</li>
@@ -49,7 +49,7 @@
                     <ul>
                         <li>Create a text or notes field.</li>
                         <li>In the <b>Action Tags / Field Annotation</b><br>
-                            Add the <b>@MISSINGCODE=SYMBOL</b> annotation (no quotes around the symbol)<br>
+                            Add the <b>@MISSINGCODE=SYMBOL</b> annotation<br>
                         <li> The following <b>symbols</b> can be used with the tag 
                         <table border="0">
                             <tr>
@@ -93,27 +93,25 @@
                         <li>
                             <b>Examples</b><br>
                             <pre>@MISSINGCODE=DK,PF</pre>
-                            <img src="https://uwmadison.box.com/shared/static/gu7ilxa1k09midn2zteiz08rvfxbqtat.png">
+                            <img class="img-responsive" src="https://uwmadison.box.com/shared/static/gu7ilxa1k09midn2zteiz08rvfxbqtat.png">
                             <br></br>
                             <pre>@MISSINGCODE=DC,NA @CHARLIMIT=4</pre>
-                            <img src="https://uwmadison.box.com/shared/static/2vnss7jdae02782yxzs3hjl8j5a8xz6d.png">
+                            <img class="img-responsive" src="https://uwmadison.box.com/shared/static/2vnss7jdae02782yxzs3hjl8j5a8xz6d.png">
                             <br></br>
                             <pre>@DEFAULT="The Hitchhiker's Guide to The Galaxy" @MISSINGCODE=DK,RF</pre>
-                            <img src="https://uwmadison.box.com/shared/static/nwrbkfb3c168wje3clqzprnrcszrp06h.png">
+                            <img class="img-responsive" src="https://uwmadison.box.com/shared/static/nwrbkfb3c168wje3clqzprnrcszrp06h.png">
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    Known issues
+                    Issues & Quirks
                 </div>
                 <div class="panel-body">
                     <ul>
                         <li>The buttons created by this action tag do not display on the "preview instrument" page  </li>
-                        <li>The action tag <b>does not respect the "@READONLY" action tag</b>. As such the two tags should not be used in combination with one another.</li>
-                        <li>When used with the "@CHARLIMIT" action tag, "@MISSINGCODE" must be first. This is recognized as a bug and is being investigated. </li>
-                        <li><b>Major: </b>I have not yet decided if the coded values will be end-user changeable. Adding that will require some amount of dev. Otherwise this plugin is near-complete and ready for testing.</li>
+                        <li>The action tag <b>does not respect the @READONLY action tag</b>. As such the two tags should not be used in combination with one another.</li>
                     </ul> 
                 </div>
             </div>
