@@ -8,6 +8,8 @@
     treated as though they had none.
     
     Syntax is @MISSINGCODE=NA,PF,RF,DC,DK,MS
+    or for advanced usage...
+    @MISSINGCODE=(NA),("Custom_Text","999")
     
                                 none      zip           email         time    phone     date
     NA | Not Applicable       | -6  | 99999-0006 | na@fake.wisc.edu | 00:00 |   X   | 01/01/1900
@@ -51,7 +53,9 @@ $startup_vars = $hook_functions[$term];
     }
     .missingCodeButton {
         margin-top: 5px;
-        margin-bottom: 5px;
+        margin-bottom: 3px;
+        display: inline-block;
+        padding = 2px;
     }
 </style>
 <script type='text/javascript'>
@@ -113,10 +117,10 @@ $(document).ready(function() {
         // Parse the input to the tag, format: [["DK"],["PS"],["button_text","code_value"]]
         parsed_args = args.params.match(/\((.*?)\)/g)
         if(parsed_args == null)
-            args = args.params.split(",").map(s => [s])
+            args = args.params.split(",").map(s => [s.toUpperCase()])
         else {
             args = parsed_args.map(s => s.slice(1,-1)).map( function(a) {
-                if(a.length == 2) return [a];
+                if(a.length == 2) return [a.toUpperCase()];
                 else return a.split(/,(?=(?:(?:[^'"]*(?:'|")){2})*[^'"]*$)/).map(s => s.slice(1,-1));
             });
         }
@@ -126,7 +130,7 @@ $(document).ready(function() {
             // Using built in symbols etc
             if( arg.length == 1 ) {
                 $.each(coding, function(_,codeObj) { 
-                    if( arg[0].toUpperCase() == codeObj.sym ) {
+                    if( arg[0] == codeObj.sym ) {
                         insertCode = template.replace(/MC/g, codeObj.sym).replace(/FLD/g, field).replace(/TITLE/g, codeObj.text);
                         
                         // Replace w/ correct code
