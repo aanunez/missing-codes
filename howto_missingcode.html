@@ -22,7 +22,7 @@
                     Purpose
                 </div>
                 <div class="panel-body">
-                    This new action tag allows you to add buttons below a text or notes field with options such as "Missing" or "Don't know". These buttons, when selected, will disable entry on the box and populate it with an appropriate coded value determined by the validation, if any, used on the field. Available options include ...
+                    This action tag allows you to add buttons below a text or notes field with options such as "Missing" or "Don't know". These buttons, when selected, will disable entry on the box and populate it with an appropriate coded value determined by the validation, if any, used on the field. Available options include ...
                     <ul>
                         <li>Not Applicable  </li>
                         <li>Prefer not to answer</li>
@@ -41,6 +41,99 @@
                     Using this action tag requires <b>no</b> special knowledge, changes to your project settings, or intervention by administrators.
                 </div>
             </div>
+            <style>
+            .left-border{
+                border-left: #ddd;
+                border-left-width: thin;
+                border-left-style: solid;
+            }
+            </style>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    Default Code Values
+                </div>
+                <div class="panel-body">
+                The code value used by the action tag is determined by any validation enabled on the field. Validations such as "Date Time" and "YMD" behave as expected, concatenating or adjusting the date format as needed.
+                <br></br>
+                <table class="table table-hover">
+                  <tr>
+                    <th style="border-top:none"></th>
+                    <th style="border-top:none"></th>
+                    <th colspan="6" class="left-border"  style="border-top:none">Validation Type</th>
+                  </tr> 
+                  <tr>
+                    <th><b>Symbol</b></td>
+                    <th><b>Button Text</b></td>
+                    <th class="left-border"><b>None, Integer, Number</b></td>
+                    <th><b>Zip</b></td>
+                    <th><b>Email<br></b></td>
+                    <th><b>Time</b></td>
+                    <th><b>Date</b></td>
+                    <th><b>Phone</b></td>
+                  </tr>
+                  <tr>
+                    <td>NA</td>
+                    <td>Not Applicable</td>
+                    <td class="left-border">-6</td>
+                    <td>99999-0006</td>
+                    <td>na@fake.wisc.edu</td>
+                    <td>00:00</td>
+                    <td>01/01/1900</td>
+                    <td>X</td>
+                  </tr>
+                  <tr>
+                    <td>PF</td>
+                    <td><br>Prefer not to answer</td>
+                    <td class="left-border">-7</td>
+                    <td>99999-0007</td>
+                    <td>pf@fake.wisc.edu</td>
+                    <td>00:00</td>
+                    <td>01/01/1901</td>
+                    <td>X</td>
+                  </tr>
+                  <tr>
+                    <td>RF</td>
+                    <td>Refused</td>
+                    <td class="left-border">-7</td>
+                    <td>99999-0007</td>
+                    <td>rf@fake.wisc.edu</td>
+                    <td>00:00</td>
+                    <td>01/01/1901</td>
+                    <td>X</td>
+                  </tr>
+                  <tr>
+                    <td>DC</td>
+                    <td>Declined</td>
+                    <td class="left-border">-7</td>
+                    <td>99999-0007</td>
+                    <td>dc@fake.wisc.edu</td>
+                    <td>00:00</td>
+                    <td>01/01/1901</td> 
+                    <td>X</td>
+                  </tr>
+                  <tr>
+                    <td>DK</td>
+                    <td>Don't Know</td>
+                    <td class="left-border">-8</td>
+                    <td>99999-0008</td>
+                    <td>dk@fake.wisc.edu</td>
+                    <td>00:00</td>
+                    <td>01/01/1902</td>
+                    <td>X</td>
+                  </tr>
+                  <tr>
+                    <td>MS</td>
+                    <td>Missing</td>
+                    <td class="left-border">-9</td>
+                    <td>99999-0009</td>
+                    <td>ms@fake.wisc.edu</td>
+                    <td>00:00</td>
+                    <td>01/01/1903</td>
+                    <td>X</td>
+                  </tr>
+                </table>
+                </div>
+            </div>
             <div class="panel panel-success">
                 <div class="panel-heading">
                     Using the action tag
@@ -50,45 +143,7 @@
                         <li>Create a text or notes field.</li>
                         <li>In the <b>Action Tags / Field Annotation</b><br>
                             Add the <b>@MISSINGCODE=SYMBOL</b> annotation<br>
-                        <li> The following <b>symbols</b> can be used with the tag 
-                        <table border="0">
-                            <tr>
-                                <th width=30%>Symbol</th>
-                                <th width=30%>Coded</th>
-                                <th>Button Text</th>
-                            </tr>
-                            <tr>
-                                <td>NA</td>
-                                <td>-6</td>
-                                <td>Not Applicable</td>
-                            </tr>
-                            <tr>
-                                <td>PF</td>
-                                <td>-7</td>
-                                <td>Prefer not to answer</td>
-                            </tr>
-                            <tr>
-                                <td>RF</td>
-                                <td>-7</td>
-                                <td>Refused</td>
-                            </tr>
-                            <tr>
-                                <td>DC</td>
-                                <td>-7</td>
-                                <td>Declined</td>
-                            </tr>
-                            <tr>
-                                <td>DK</td>
-                                <td>-8</td>
-                                <td>Don't Know</td>
-                            </tr>
-                            <tr>
-                                <td>MS</td>
-                                <td>-9</td>
-                                <td>Missing</td>
-                            </tr>
-                            </table> 
-                        </li>
+                        <li> Consult the above table for a list of <b>symbols</b> that can be used.
                         </li>
                         <li>
                             <b>Examples</b><br>
@@ -104,7 +159,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="panel panel-info">
+            <div class="panel panel-danger">
                 <div class="panel-heading">
                     Issues & Quirks
                 </div>
@@ -112,7 +167,41 @@
                     <ul>
                         <li>The buttons created by this action tag do not display on the "preview instrument" page  </li>
                         <li>The action tag <b>does not respect the @READONLY action tag</b>. As such the two tags should not be used in combination with one another.</li>
+                        <li>Due to an issue with how RedCap implements the <b>@CHARLIMIT</b> action tag, the <b>@MISSINGCODE</b> action tag must be first when used on the same field.
+
                     </ul> 
+                </div>
+            </div>
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    Advanced Usage
+                </div>
+                <div class="panel-body">
+                    In addition to the typical usage, <b>@MISSINGCODE</b> can also be used for custom button text and coded values.
+                    <ul>
+                        <li>Use the action tag as described above, but with the syntax<br>
+                            <b>@MISSINGCODE=("Text","Code")</b>
+                        </li>
+                        <li>You can mix the above symbols in with custom values too, but you will need to wrap them in parentheses. <br>
+                            <b>@MISSINGCODE=("Text","Code"),(SYMBOL)</b>
+                        </li>
+                        <li>If your custom text includes spaces, you should instead use underscores. Spaces are not permitted in the coded values and underscores are interpreted literally in them.<br>
+                            <b>@MISSINGCODE=("Button_Text","Code"),(SYMBOL),("Another_Button","999")</b>
+                        </li>
+                        <li>In all of the above <b>please note the lack spacing</b>. Adding unneeded spaces may cause RedCap's parsing engine to ignore the tag.<br>
+                        </li>
+                        <li>
+                            <b>Examples (I need to update these)</b><br>
+                            <pre>@MISSINGCODE=DK,PF</pre>
+                            <img class="img-responsive" src="https://uwmadison.box.com/shared/static/gu7ilxa1k09midn2zteiz08rvfxbqtat.png">
+                            <br></br>
+                            <pre>@MISSINGCODE=DC,NA @CHARLIMIT=4</pre>
+                            <img class="img-responsive" src="https://uwmadison.box.com/shared/static/2vnss7jdae02782yxzs3hjl8j5a8xz6d.png">
+                            <br></br>
+                            <pre>@DEFAULT="The Hitchhiker's Guide to The Galaxy" @MISSINGCODE=DK,RF</pre>
+                            <img class="img-responsive" src="https://uwmadison.box.com/shared/static/nwrbkfb3c168wje3clqzprnrcszrp06h.png">
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

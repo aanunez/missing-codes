@@ -28,14 +28,12 @@ Only ./framework/resources/missingCodes.php contains unique code, the rest is th
 * The tag works for both Text and Notes fields
 * There is no dodging RedCap's built in validation. If you enable validation on the field then your coded value must be within the specified range.
 * The buttons do not respect the "@READONLY" tag
+* Please read the advanced usage section of the end-user help for info on custom button text and coding values.
 
 ## To Do
 
-* Finish support for custom values/button text
-* Buttons are stacking, is that an issue?
 * rename?
-* Update images / Examples on the published help
-* Add full table of default codes to published help
+* Update examples on help documentation
 
 ## Install
 
