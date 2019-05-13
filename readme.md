@@ -25,12 +25,11 @@ Only ./framework/resources/missingCodes.php contains unique code, the rest is th
 
 * The buttons do not display on the "preview instrument" page
 * The tag works for both Text and Notes fields
-* If date validation is used then the lower bound must be 01/01/1900
+* There is no dodging RedCap's built in validation. If you enable validation on the field then your coded value must be within the specified range.
 * The buttons do not respect the "@READONLY" tag
 
 ## To Do
 
-* Change dates to use 01/01/0001?
 * When mixing with "@CHARLIMIT", "@MISSINGCODE" must be first
 * Handle user defined code values
 * rename?

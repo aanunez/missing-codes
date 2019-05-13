@@ -76,9 +76,34 @@ function missingCodeClicked(missingItem, field, code) {
     }
 }
 
+function injectCode( html, field, code ) {
+    html = html.replace(/CODE/g, code);
+    
+    // Check if the button is set to the coded value
+    if ($('[name="' + field + '"]').val() == code) {
+        html = html.replace(/CHKD/g, "stateSelected");
+        $('[name="' + field + '"]').prop('readonly', true);
+        $('[name="' + field + '"]').addClass("fieldDisabled");
+    }
+    else 
+        html = html.replace(/CHKD/g, "");
+    
+    // Insert for Date/Time
+    if( (typeof $('[name="' + field + '"]').attr("fv") !== 'undefined') && 
+        ($('[name="' + field + '"]').attr("fv").startsWith("date") || $('[name="' + field + '"]').attr("fv").startsWith("time") ))
+        $('[name="' + field + '"]').nextAll('[class="df"]').after(html);
+
+    // Insert for all others
+    else
+        $('[name="' + field + '"]').after(html);
+}
+
 $(document).ready(function() {
     var affected_fields = <?php print json_encode($startup_vars) ?>;
     $.each(affected_fields, function(field,args) {
+        // Parse the input to the tag, format: [["DK"],["PS"],["button_text","code_value"]]
+        args = args.params.split("),(").map(s => s.replace("(","").replace(")","")).map(s => s.split(",").map(a => a.split('"').join("")))
+        
         var codeStr;
         const template = '<div class="missingCodeButton"><button id="MC_FLD" class="btn btn-defaultrc btn-xs fsl1 CHKD" type="button" onclick="missingCodeClicked(\'MC\',\'FLD\',\'CODE\')">TITLE</button></div>';
         const coding = [ {sym:"NA",code:-6,zipcode:"99999-0006",email:"na@fake.wisc.edu",time:"00:00",date:"01/01/1906",phone:"",text:"Not Applicable"},
@@ -87,69 +112,61 @@ $(document).ready(function() {
                          {sym:"DC",code:-7,zipcode:"99999-0007",email:"dc@fake.wisc.edu",time:"00:00",date:"01/01/1907",phone:"",text:"Declined"},
                          {sym:"DK",code:-8,zipcode:"99999-0008",email:"dk@fake.wisc.edu",time:"00:00",date:"01/01/1908",phone:"",text:"Don't Know"},
                          {sym:"MS",code:-9,zipcode:"99999-0009",email:"ms@fake.wisc.edu",time:"00:00",date:"01/01/1909",phone:"",text:"Missing"} ]
-        $.each(coding, function(_,codeObj) { 
-            if( args.params.indexOf(codeObj.sym)>-1 ) {
-                insertCode = template.replace(/MC/g, codeObj.sym).replace(/FLD/g, field).replace(/TITLE/g, codeObj.text);
-               
-                // Replace w/ correct code (if validation is on)
-                codeStr = codeObj.code;
-                if( (typeof $('[name="' + field + '"]').attr("fv") !== 'undefined') ) {
-                    switch( $('[name="' + field + '"]').attr("fv") ) {
-                        case "zipcode":
-                        case "time":
-                        case "email":
-                        case "phone":
-                            codeStr = codeObj[$('[name="' + field + '"]').attr("fv")];
-                        break;
-                        case "number":
-                        case "integer":
-                            //Nothing to do
-                        break;
-                        case "date_mdy":
-                        case "date_dmy":
-                            codeStr = codeObj.date;
-                        break;
-                        case "datetime_mdy":
-                        case "datetime_dmy":
-                            codeStr = codeObj.date + " " + codeObj.time;
-                        break;
-                        case "datetime_seconds_mdy":
-                        case "datetime_seconds_dmy":
-                            codeStr = codeObj.date + " " + codeObj.time + ":00";
-                        break;
-                        case "date_ymd":
-                            codeStr = codeObj.date.substr(6) + "/" + codeObj.date.substr(0,5);
-                        break;
-                        case "datetime_ymd":
-                            codeStr = codeObj.date.substr(6) + "/" + codeObj.date.substr(0,5) + " " + codeObj.time;
-                        break;
-                        case "datetime_seconds_ymd":
-                            codeStr = codeObj.date.substr(6) + "/" + codeObj.date.substr(0,5) + " " + codeObj.time + ":00";
-                        break;
-                        default:
-                            codeStr = ""    
+        
+        // Loop through every pair of arguments 
+        $.each(args, function(_,arg) { 
+            // Using "DK", "PS" etc
+            if( arg.length == 1 ) {
+                $.each(coding, function(_,codeObj) { 
+                    if( arg[0].toUpperCase() == codeObj.sym ) {
+                        insertCode = template.replace(/MC/g, codeObj.sym).replace(/FLD/g, field).replace(/TITLE/g, codeObj.text);
+                        
+                        // Replace w/ correct code
+                        codeStr = codeObj.code;
+                        if( (typeof $('[name="' + field + '"]').attr("fv") !== 'undefined') ) {
+                            switch( $('[name="' + field + '"]').attr("fv") ) {
+                                case "zipcode":
+                                case "time":
+                                case "email":
+                                case "phone":
+                                    codeStr = codeObj[$('[name="' + field + '"]').attr("fv")];
+                                break;
+                                case "number":
+                                case "integer":
+                                    //Nothing to do
+                                break;
+                                case "date_mdy":
+                                case "date_dmy":
+                                    codeStr = codeObj.date;
+                                break;
+                                case "datetime_mdy":
+                                case "datetime_dmy":
+                                    codeStr = codeObj.date + " " + codeObj.time;
+                                break;
+                                case "datetime_seconds_mdy":
+                                case "datetime_seconds_dmy":
+                                    codeStr = codeObj.date + " " + codeObj.time + ":00";
+                                break;
+                                case "date_ymd":
+                                    codeStr = codeObj.date.substr(6) + "/" + codeObj.date.substr(0,5);
+                                break;
+                                case "datetime_ymd":
+                                    codeStr = codeObj.date.substr(6) + "/" + codeObj.date.substr(0,5) + " " + codeObj.time;
+                                break;
+                                case "datetime_seconds_ymd":
+                                    codeStr = codeObj.date.substr(6) + "/" + codeObj.date.substr(0,5) + " " + codeObj.time + ":00";
+                                break;
+                                default:
+                                    codeStr = ""    
+                            }
+                        }
+                        injectCode( insertCode, field, codeStr );
                     }
-                }
-                insertCode = insertCode.replace(/CODE/g, codeStr);
-                
-                // Check if the button is set to the coded value
-                if ($('[name="' + field + '"]').val() == codeStr) {
-                    insertCode = insertCode.replace(/CHKD/g, "stateSelected");
-                    $('[name="' + field + '"]').prop('readonly', true);
-                    $('[name="' + field + '"]').addClass("fieldDisabled");
-                }
-                else 
-                    insertCode = insertCode.replace(/CHKD/g, "");
-                
-                // Insert for Date/Time
-                if( (typeof $('[name="' + field + '"]').attr("fv") !== 'undefined') && 
-                    ($('[name="' + field + '"]').attr("fv").startsWith("date") || $('[name="' + field + '"]').attr("fv").startsWith("time") ))
-                    $('[name="' + field + '"]').nextAll('[class="df"]').after(insertCode);
-
-                // Insert for all others
-                else
-                    $('[name="' + field + '"]').after(insertCode);
-                    //console.log("Pass")
+                });
+            }
+            // Using custom text & code ["Text","Code"]
+            else if( arg.length == 2 ) {
+                injectCode( template.replace(/MC/g, arg[0]).replace(/FLD/g, field).replace(/TITLE/g, arg[0].split("_").join(" ")), field, arg[1] );
             }
         });
     });
