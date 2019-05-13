@@ -23,6 +23,7 @@ Only ./framework/resources/missingCodes.php contains unique code, the rest is th
 
 ## Important Notes
 
+* When mixing with "@CHARLIMIT", "@MISSINGCODE" must be first - This appears to be an issue internal to RedCAp
 * The buttons do not display on the "preview instrument" page
 * The tag works for both Text and Notes fields
 * There is no dodging RedCap's built in validation. If you enable validation on the field then your coded value must be within the specified range.
@@ -30,8 +31,8 @@ Only ./framework/resources/missingCodes.php contains unique code, the rest is th
 
 ## To Do
 
-* When mixing with "@CHARLIMIT", "@MISSINGCODE" must be first
-* Handle user defined code values
+* Finish support for custom values/button text
+* Buttons are stacking, is that an issue?
 * rename?
 * Update images / Examples on the published help
 * Add full table of default codes to published help

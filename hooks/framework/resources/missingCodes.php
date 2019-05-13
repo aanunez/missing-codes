@@ -57,19 +57,21 @@ $startup_vars = $hook_functions[$term];
 <script type='text/javascript'>
 function missingCodeClicked(missingItem, field, code) {
     const prefixList = ["NA","PF","RF","DC","DK","MS"]
+    
+    // The button that was already clicked was clicked again. Toggle it off
     if ($('#' + missingItem + '_' + field).hasClass("stateSelected")) {
         $('#' + missingItem + '_' + field).removeClass("stateSelected");
         $('[name="' + field + '"]').prop("readonly", false);
         $('[name="' + field + '"]').val("");
         $('[name="' + field + '"]').removeClass("fieldDisabled");
     }
+    
+    // A button was clicked for the first time. Turn all the others off except for the one clicked.
     else {
-        $.each(prefixList, function(_,prefix) {  // undo all except for what was clicked
-            if (missingItem == prefix) 
-                $('#' + prefix + '_' + field).addClass("stateSelected"); 
-            else 
-                $('#' + prefix + '_' + field).removeClass("stateSelected");
+        $.each($("button[id$='_" + field + "']"), function(_,btn) {
+            $(btn).removeClass("stateSelected");
         });
+        $('#' + missingItem + '_' + field).addClass("stateSelected");
         $('[name="' + field + '"]').val(code);
         $('[name="' + field + '"]').prop('readonly', true);
         $('[name="' + field + '"]').addClass("fieldDisabled");
@@ -77,8 +79,7 @@ function missingCodeClicked(missingItem, field, code) {
 }
 
 function injectCode( html, field, code ) {
-    code = (''+code).split("'").join("\\x27");
-    html = html.replace(/CODE/g, code);
+    html = html.replace(/CODE/g, (''+code).split("'").join("\\x27"));
 
     if ($('[name="' + field + '"]').val() == code) {
         html = html.replace(/CHKD/g, "stateSelected");
@@ -101,10 +102,6 @@ function injectCode( html, field, code ) {
 $(document).ready(function() {
     var affected_fields = <?php print json_encode($startup_vars) ?>;
     $.each(affected_fields, function(field,args) {
-        // Parse the input to the tag, format: [["DK"],["PS"],["button_text","code_value"]]
-        args = args.params.split("),(").map(s => s.replace("(","").replace(")","")).map(s => s.split(",").map(a => a.split('"').join("")))
-        
-        var codeStr;
         const template = '<div class="missingCodeButton"><button id="MC_FLD" class="btn btn-defaultrc btn-xs fsl1 CHKD" type="button" onclick="missingCodeClicked(\'MC\',\'FLD\',\'CODE\')">TITLE</button></div>';
         const coding = [ {sym:"NA",code:-6,zipcode:"99999-0006",email:"na@fake.wisc.edu",time:"00:00",date:"01/01/1906",phone:"",text:"Not Applicable"},
                          {sym:"PF",code:-7,zipcode:"99999-0007",email:"pf@fake.wisc.edu",time:"00:00",date:"01/01/1907",phone:"",text:"Prefer not to answer"},
@@ -113,16 +110,27 @@ $(document).ready(function() {
                          {sym:"DK",code:-8,zipcode:"99999-0008",email:"dk@fake.wisc.edu",time:"00:00",date:"01/01/1908",phone:"",text:"Don't Know"},
                          {sym:"MS",code:-9,zipcode:"99999-0009",email:"ms@fake.wisc.edu",time:"00:00",date:"01/01/1909",phone:"",text:"Missing"} ]
         
+        // Parse the input to the tag, format: [["DK"],["PS"],["button_text","code_value"]]
+        parsed_args = args.params.match(/\((.*?)\)/g)
+        if(parsed_args == null)
+            args = args.params.split(",").map(s => [s])
+        else {
+            args = parsed_args.map(s => s.slice(1,-1)).map( function(a) {
+                if(a.length == 2) return [a];
+                else return a.split(/,(?=(?:(?:[^'"]*(?:'|")){2})*[^'"]*$)/).map(s => s.slice(1,-1));
+            });
+        }
+        
         // Loop through every pair of arguments 
         $.each(args, function(_,arg) { 
-            // Using "DK", "PS" etc
+            // Using built in symbols etc
             if( arg.length == 1 ) {
                 $.each(coding, function(_,codeObj) { 
                     if( arg[0].toUpperCase() == codeObj.sym ) {
                         insertCode = template.replace(/MC/g, codeObj.sym).replace(/FLD/g, field).replace(/TITLE/g, codeObj.text);
                         
                         // Replace w/ correct code
-                        codeStr = codeObj.code;
+                        var codeStr = codeObj.code;
                         if( (typeof $('[name="' + field + '"]').attr("fv") !== 'undefined') ) {
                             switch( $('[name="' + field + '"]').attr("fv") ) {
                                 case "zipcode":
