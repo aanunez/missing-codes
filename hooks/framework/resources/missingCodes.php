@@ -77,9 +77,9 @@ function missingCodeClicked(missingItem, field, code) {
 }
 
 function injectCode( html, field, code ) {
+    code = (''+code).split("'").join("\\x27");
     html = html.replace(/CODE/g, code);
-    
-    // Check if the button is set to the coded value
+
     if ($('[name="' + field + '"]').val() == code) {
         html = html.replace(/CHKD/g, "stateSelected");
         $('[name="' + field + '"]').prop('readonly', true);
