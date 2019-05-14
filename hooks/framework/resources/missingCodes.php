@@ -60,8 +60,6 @@ $startup_vars = $hook_functions[$term];
 </style>
 <script type='text/javascript'>
 function missingCodeClicked(missingItem, field, code) {
-    const prefixList = ["NA","PF","RF","DC","DK","MS"]
-    
     // The button that was already clicked was clicked again. Toggle it off
     if ($('#' + missingItem + '_' + field).hasClass("stateSelected")) {
         $('#' + missingItem + '_' + field).removeClass("stateSelected");
