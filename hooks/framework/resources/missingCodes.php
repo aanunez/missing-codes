@@ -42,7 +42,6 @@ if (!isset($hook_functions)) {
 if (!isset($hook_functions[$term])) {
     return;
 }
-$startup_vars = $hook_functions[$term];
 ?>
 <style>
     .stateSelected {
@@ -102,7 +101,7 @@ function injectCode( html, field, code ) {
 }
 
 $(document).ready(function() {
-    var affected_fields = <?php print json_encode($startup_vars) ?>;
+    var affected_fields = <?php print json_encode($hook_functions[$term]) ?>;
     $.each(affected_fields, function(field,args) {
         const template = '<div class="missingCodeButton"><button id="MC_FLD" class="btn btn-defaultrc btn-xs fsl1 CHKD" type="button" onclick="missingCodeClicked(\'MC\',\'FLD\',\'CODE\')">TITLE</button></div>';
         const coding = [ {sym:"NA",code:-6,zipcode:"99999-0006",email:"na@fake.wisc.edu",time:"00:00",date:"01/01/1906",phone:"",text:"Not Applicable"},

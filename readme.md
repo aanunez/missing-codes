@@ -1,6 +1,6 @@
 ## What it is
 
-This plugin adds the @MISSINGCODE action tag. Zero configuration is needed for end-users. 
+This [RedCap](https://www.project-redcap.org/) plugin adds the @MISSINGCODE action tag. Zero configuration is needed for end-users. 
 
     This hook can be used to place buttons below a text or notes field to
     populate (and lock) the field with predetermined coded values 
