@@ -35,6 +35,7 @@ Only ./framework/resources/missingCodes.php contains unique code, the rest is th
 ## To Do
 
 * The buttons do not respect the "@READONLY" tag
+* The buttons probably don't play nice with the numb int FV anymore. Issue?
 * rename?
 * Update examples on help documentation
 
