@@ -51,10 +51,9 @@ if (!isset($hook_functions[$term])) {
         background-color: #CECECE;
     }
     .missingCodeButton {
-        margin-top: 5px;
-        margin-bottom: 3px;
+        margin-top: 2px !important;
         display: inline-block;
-        padding = 2px;
+        padding: 3px !important;
     }
 </style>
 <script type='text/javascript'>
@@ -93,7 +92,7 @@ function injectCode( html, field, code ) {
     // Insert for Date/Time
     if( (typeof $('[name="' + field + '"]').attr("fv") !== 'undefined') && 
         ($('[name="' + field + '"]').attr("fv").startsWith("date") || $('[name="' + field + '"]').attr("fv").startsWith("time") ))
-        $('[name="' + field + '"]').nextAll('[class="df"]').after(html);
+        $('[name="' + field + '"]').nextAll('[class="df"]').after('<br>'+html);
 
     // Insert for all others
     else
