@@ -10,14 +10,17 @@ This [RedCap](https://www.project-redcap.org/) plugin adds the @MISSINGCODE acti
     treated as though they had none.
     
     Syntax is @MISSINGCODE=NA,PF,RF,DC,DK,MS
+    or for advanced usage...
+    @MISSINGCODE=(NA),("Custom_Text","999")
     
                                 none      zip           email         time    phone     date
-    NA | Not Applicable       | -6  | 99999-0006 | na@fake.wisc.edu | 00:00 |   X   | 01/01/1900
-    PF | Prefer not to answer | -7  | 99999-0007 | pf@fake.wisc.edu | 00:00 |   X   | 01/01/1901
-    RF | Refused              | -7  | 99999-0007 | rf@fake.wisc.edu | 00:00 |   X   | 01/01/1901
-    DC | Declined             | -7  | 99999-0007 | dc@fake.wisc.edu | 00:00 |   X   | 01/01/1901
-    DK | Don't Know           | -8  | 99999-0008 | dk@fake.wisc.edu | 00:00 |   X   | 01/01/1902
-    MS | Missing              | -9  | 99999-0009 | ms@fake.wisc.edu | 00:00 |   X   | 01/01/1903
+    NA | Not Applicable       | -6  | 99999-0006 | na@fake.wisc.edu | 00:00 |   X   | 01-01-1906
+    PF | Prefer not to answer | -7  | 99999-0007 | pf@fake.wisc.edu | 00:00 |   X   | 01-01-1907
+    RF | Refused              | -7  | 99999-0007 | rf@fake.wisc.edu | 00:00 |   X   | 01-01-1907
+    DC | Declined             | -7  | 99999-0007 | dc@fake.wisc.edu | 00:00 |   X   | 01-01-1907
+    DK | Don't Know           | -8  | 99999-0008 | dk@fake.wisc.edu | 00:00 |   X   | 01-01-1908
+    MS | Missing              | -9  | 99999-0009 | ms@fake.wisc.edu | 00:00 |   X   | 01-01-1909
+
 
 Only ./framework/resources/missingCodes.php contains unique code, the rest is the stock [RedCap hooks framework](https://github.com/123andy/redcap-hook-framework) with line changes as needed to include this hook. These files are included for ease of install.
 
@@ -27,11 +30,11 @@ Only ./framework/resources/missingCodes.php contains unique code, the rest is th
 * The buttons do not display on the "preview instrument" page
 * The tag works for both Text and Notes fields
 * There is no dodging RedCap's built in validation. If you enable validation on the field then your coded value must be within the specified range.
-* The buttons do not respect the "@READONLY" tag
 * Please read the advanced usage section of the end-user help for info on custom button text and coding values.
 
 ## To Do
 
+* The buttons do not respect the "@READONLY" tag
 * rename?
 * Update examples on help documentation
 
