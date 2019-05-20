@@ -34,8 +34,7 @@ Only ./framework/resources/missingCodes.php contains unique code, the rest is th
 
 ## To Do
 
-* rename?
-* Update examples on help documentation
+* Rename? It's a pretty bad name.
 
 ## Install
 

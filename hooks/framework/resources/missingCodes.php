@@ -57,7 +57,13 @@ if (!isset($hook_functions[$term])) {
     }
 </style>
 <script type='text/javascript'>
+
+// Used as the "onclick" method for buttons that we insert to the DOM
 function missingCodeClicked(missingItem, field, code) {
+    // missingItem - Symbol (DK,NA etc) or full text of button
+    // field - Name of field as seen on the dom. This is always the variable name.
+    // code - Value to check for or write to the field.
+    
     // The button that was already clicked was clicked again. Toggle it off
     if ($('#' + missingItem + '_' + field).hasClass("stateSelected")) {
         $('#' + missingItem + '_' + field).removeClass("stateSelected");
@@ -78,7 +84,12 @@ function missingCodeClicked(missingItem, field, code) {
     }
 }
 
+// Inserts the button and its wrapper div into the DOM
 function injectCode( html, field, code ) {
+    // html - The HTML string to be inserted
+    // field - Name of field as seen on the dom. This is always the variable name.
+    // code - Value to check for (we may need to highlight the button) and to insert into the html arg.
+    
     html = html.replace(/CODE/g, (''+code).split("'").join("\\x27"));
 
     if ($('[name="' + field + '"]').val() == code) {
@@ -99,7 +110,9 @@ function injectCode( html, field, code ) {
         $('[name="' + field + '"]').after(html);
 }
 
+// Helper function, returns true if the field is READONLY
 function readOnlyCheck( field ) {
+    // field - Name of field as seen on the dom. This is always the variable name.
     return $("[name='"+field+"']").closest("tr").hasClass("@READONLY");
 }
 
@@ -116,18 +129,18 @@ $(document).ready(function() {
         
         // Parse the input to the tag, format: [["DK"],["PS"],["button_text","code_value"]]
         parsed_args = args.params.match(/\((.*?)\)/g)
-        if(parsed_args == null)
+        if(parsed_args == null) // No parentheses found, split on commas
             args = args.params.split(",").map(s => [s.toUpperCase()])
-        else {
+        else { // Regex magic, a = "foo","woo" or "dk" or dk (no quotes)
             args = parsed_args.map(s => s.slice(1,-1)).map( function(a) {
-                if(a.length == 2) return [a.toUpperCase()];
+                if(a.length == 2) return [a.toUpperCase()]; 
                 else return a.split(/,(?=(?:(?:[^'"]*(?:'|")){2})*[^'"]*$)/).map(s => s.slice(1,-1));
             });
-        }
+        } 
         
         // Loop through every pair of arguments 
         $.each(args, function(_,arg) { 
-            // Using built in symbols etc
+            // Assume using the built in symbols
             if( arg.length == 1 ) {
                 $.each(coding, function(_,codeObj) { 
                     if( arg[0] == codeObj.sym ) {
@@ -174,10 +187,11 @@ $(document).ready(function() {
                         }
                         if ( !readOnlyCheck( field ) )
                             injectCode( insertCode, field, codeStr );
+                        return true; // Break the loop, go to next arg pair
                     }
                 });
             }
-            // Using custom text & code ["Text","Code"]
+            // Assume using custom text & code ["Text","Code"]
             else if( (arg.length == 2) && !readOnlyCheck( field )) {
                 injectCode( template.replace(/MC/g, arg[0]).replace(/FLD/g, field).replace(/TITLE/g, arg[0].split("_").join(" ")), field, arg[1] );
             }
