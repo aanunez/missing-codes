@@ -99,6 +99,10 @@ function injectCode( html, field, code ) {
         $('[name="' + field + '"]').after(html);
 }
 
+function readOnlyCheck( field ) {
+    return $("[name='"+field+"']").closest("tr").hasClass("@READONLY");
+}
+
 $(document).ready(function() {
     var affected_fields = <?php print json_encode($hook_functions[$term]) ?>;
     $.each(affected_fields, function(field,args) {
@@ -168,12 +172,13 @@ $(document).ready(function() {
                                     codeStr = ""    
                             }
                         }
-                        injectCode( insertCode, field, codeStr );
+                        if ( !readOnlyCheck( field ) )
+                            injectCode( insertCode, field, codeStr );
                     }
                 });
             }
             // Using custom text & code ["Text","Code"]
-            else if( arg.length == 2 ) {
+            else if( (arg.length == 2) && !readOnlyCheck( field )) {
                 injectCode( template.replace(/MC/g, arg[0]).replace(/FLD/g, field).replace(/TITLE/g, arg[0].split("_").join(" ")), field, arg[1] );
             }
         });

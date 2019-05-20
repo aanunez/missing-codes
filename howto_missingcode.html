@@ -150,7 +150,7 @@
                             <pre>@MISSINGCODE=DK,PF</pre>
                             <img class="img-responsive" src="https://uwmadison.box.com/shared/static/fkviearyabdvj3cltfw5pfnpp3y7dxjm.png">
                             <br></br>
-                            <pre>@MISSINGCODE=DC,NA @CHARLIMIT=4</pre>
+                            <pre>@MISSINGCODE=DC @CHARLIMIT=4</pre>
                             <img class="img-responsive" src="https://uwmadison.box.com/shared/static/agcynqzvye30jbjajh4qo3soz6gbi4bt.png">
                             <br></br>
                             <pre>@DEFAULT="The Hitchhiker's Guide to The Galaxy" @MISSINGCODE=DK,RF</pre>
@@ -160,20 +160,20 @@
                         <li>
                             <b>Interacting With Branching Logic</b><br>
                             If the specific date of an event isn't known we can use simple branching logic, checking for the coded value of the button in the first field, to show a follow up question asking for a month & year or only year.
-                            <img class="img-responsive" src="https://uwmadison.box.com/shared/static/">
+                            <img class="img-responsive" src="https://uwmadison.box.com/shared/static/ikd6svvtslm0l1nu8u3e9lo3ek5siaft.png">
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="panel panel-danger">
                 <div class="panel-heading">
-                    Issues & Quirks
+                    Issues & Notes
                 </div>
                 <div class="panel-body">
                     <ul>
+                        <li>The action tag correctly <b>respects the @READONLY action tag</b> and isn't usable on a read-only field. </li>
                         <li>The buttons created by this action tag do not display on the "preview instrument" page  </li>
-                        <li>The action tag <b>does not respect the @READONLY action tag</b>. As such the two tags should not be used in combination with one another.</li>
-                        <li>Due to an issue with how RedCap implements the <b>@CHARLIMIT</b> action tag, the <b>@MISSINGCODE</b> action tag must be first when used on the same field.
+                        <li>Due to an issue with how RedCap implements the <b>@CHARLIMIT</b> action tag, the <b>@MISSINGCODE</b> action tag must be first, as seen above, when used on the same field.
 
                     </ul> 
                 </div>
@@ -197,19 +197,19 @@
                         <li>In all of the above <b>please note the lack spacing</b>. Adding unneeded spaces may cause RedCap's parsing engine to ignore the tag.<br>
                         </li>
                         <li>
-                            <b>Examples (I need to update these)</b><br>
+                            <b>Examples</b><br>
                             <pre>@MISSINGCODE=("Out_of_Office","ooo")</pre>
-                            <img class="img-responsive" src="https://uwmadison.box.com/shared/static/.png">
+                            <img class="img-responsive" src="https://uwmadison.box.com/shared/static/0bovgorwymvbxcb80xno445wpqhlbxg4.png">
                             <br></br>
-                            <pre>@MISSINGCODE=(DK),("Will_Collect_In_Futre","-5")</pre>
-                            <img class="img-responsive" src="https://uwmadison.box.com/shared/static/.png">
+                            <pre>@MISSINGCODE=(DK),("Will_Collect_In_Future","-1")</pre>
+                            <img class="img-responsive" src="https://uwmadison.box.com/shared/static/rw9s08z5fuskdnypabf49ng8dxtfweww.png">
                             <br></br>
                             <b>Novel Case</b> - Include common answers to a text field, either as a coded value, a the literal value, or a pre-calculated value.
                             <pre>@MISSINGCODE=("Python","Python"),("Go","Go"),("PHP","lolno")</pre>
-                            <img class="img-responsive" src="https://uwmadison.box.com/shared/static/.png">
+                            <img class="img-responsive" src="https://uwmadison.box.com/shared/static/h34u5ybmwlcqwcxf9o7ppk7x38cd3qim.png">
                             <br></br>
-                            <pre>@MISSINGCODE=("1 Pack","20"),("2 Packs","40"),("3 Packs","60")</pre>
-                            <img class="img-responsive" src="https://uwmadison.box.com/shared/static/.png">
+                            <pre>@MISSINGCODE=("1_Pack","20"),("2_Packs","40"),("3_Packs","60")</pre>
+                            <img class="img-responsive" src="https://uwmadison.box.com/shared/static/gvi10xl0bt1wu9i1kjnltij50g40hlvr.png">
                         </li>
                     </ul>
                 </div>
