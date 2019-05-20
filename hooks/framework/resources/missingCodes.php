@@ -48,7 +48,7 @@ if (!isset($hook_functions[$term])) {
         background-color: #DBF7DF;
     }
     .fieldDisabled {
-        background-color: #CECECE;
+        background-color: #CECECE !important;
     }
     .missingCodeButton {
         margin-top: 2px !important;
