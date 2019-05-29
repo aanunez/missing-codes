@@ -111,9 +111,13 @@ function injectCode( html, field, code ) {
 }
 
 // Helper function, returns true if the field is READONLY
-function readOnlyCheck( field ) {
+function ignoreCheck( field ) {
     // field - Name of field as seen on the dom. This is always the variable name.
-    return $("[name='"+field+"']").closest("tr").hasClass("@READONLY");
+    return ( $("input[name='"+field+"']").closest("tr").hasClass("@READONLY") || // Check if read only
+             $("input[name='"+field+"']").hasClass("rci-calc") || // Check if its a calc field
+             $("select[name='"+field+"']").length > 0 || // Check if its a dropdown (or SQL)
+             $("div[id='"+field+"-linknew']").length > 0 || // Check if signature or file upload
+             $("input[name='"+field+"']").hasClass("sldrnum") ) // Check if slider
 }
 
 $(document).ready(function() {
@@ -185,14 +189,14 @@ $(document).ready(function() {
                                     codeStr = ""    
                             }
                         }
-                        if ( !readOnlyCheck( field ) )
+                        if ( !ignoreCheck( field ) )
                             injectCode( insertCode, field, codeStr );
                         return true; // Break the loop, go to next arg pair
                     }
                 });
             }
             // Assume using custom text & code ["Text","Code"]
-            else if( (arg.length == 2) && !readOnlyCheck( field )) {
+            else if( (arg.length == 2) && !ignoreCheck( field )) {
                 injectCode( template.replace(/MC/g, arg[0]).replace(/FLD/g, field).replace(/TITLE/g, arg[0].split("_").join(" ")), field, arg[1] );
             }
         });
