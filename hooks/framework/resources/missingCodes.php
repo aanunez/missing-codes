@@ -132,18 +132,18 @@ $(document).ready(function() {
                          {sym:"MS",code:-9,zipcode:"99999-0009",email:"ms@fake.wisc.edu",time:"00:00",date:"01-01-1909",phone:"",text:"Missing"} ]
         
         // Parse the input to the tag, format: [["DK"],["PS"],["button_text","code_value"]]
-        parsed_args = args.params.match(/\((.*?)\)/g)
-        if(parsed_args == null) // No parentheses found, split on commas
+        temp = args.params.match(/\((.*?)\)/g)
+        if(temp == null) // No parentheses found, split on commas
             args = args.params.split(",").map(s => [s.toUpperCase()])
         else { // Regex magic, a = "foo","woo" or "dk" or dk (no quotes)
-            args = parsed_args.map(s => s.slice(1,-1)).map( function(a) {
+            args = temp.map(s => s.slice(1,-1)).map( function(a) {
                 if(a.length == 2) return [a.toUpperCase()]; 
                 else return a.split(/,(?=(?:(?:[^'"]*(?:'|")){2})*[^'"]*$)/).map(s => s.slice(1,-1));
             });
         } 
         
         // Loop through every pair of arguments 
-        $.each(args, function(_,arg) { 
+        $.each(args.reverse(), function(_,arg) { 
             // Assume using the built in symbols
             if( arg.length == 1 ) {
                 $.each(coding, function(_,codeObj) { 
