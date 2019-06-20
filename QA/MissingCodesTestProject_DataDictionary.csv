@@ -1,0 +1,32 @@
+Variable / Field Name,Form Name,Section Header,Field Type,Field Label,"Choices, Calculations, OR Slider Labels",Field Note,Text Validation Type OR Show Slider Number,Text Validation Min,Text Validation Max,Identifier?,Branching Logic (Show field only if...),Required Field?,Custom Alignment,Question Number (surveys only),Matrix Group Name,Matrix Ranking?,Field Annotation
+record_id,example_for_documentation,,text,Record ID,,,,,,,,,,,,,
+one,example_for_documentation,,notes,1. Briefly explain the meaning of life,,,,,,,,,,,,," @MISSINGCODE=DK,PF"
+two,example_for_documentation,,text,2. Last four digits of your Social?,,,,,,,,,,,,, @MISSINGCODE=DC @CHARLIMIT=4
+three,example_for_documentation,,text,3. Favorite book?,,,,,,,,,,,,," @DEFAULT=""The Hitchhiker's Guide to The Galaxy"" @MISSINGCODE=DK,RF"
+date_sw,example_for_documentation,Date Examples,text,1. When was StarWars originally released?,,,date_mdy,,,,,,,,,, @MISSINGCODE=DK
+date_sw_year,example_for_documentation,,text,"1a. Ok, how about just the year?",,,integer,1950,1999,,[date_sw] = '01-01-1908',,,,,,
+e_response,example_for_documentation,Advanced Usage,notes,Summarize the response: ,,,,,,,,,,,,," @MISSINGCODE=(""Out_of_Office"",""ooo"")"
+e_adv_2,example_for_documentation,,text,How many sugary snacks does the subject consume in a day?,,,,,,,,,,,,," @MISSINGCODE=(DK),(""Will_Collect_In_Future"",""-1"")"
+e_adv_3,example_for_documentation,,text,Favorite programming language?,,,,,,,,,,,,," @MISSINGCODE=(""Python"",""Python""),(""Go"",""Go""),(""PHP"",""lolno"")"
+e_adv_4,example_for_documentation,,text,How many cigarettes does the subject smoke per week?,,,,,,,,,,,,," @MISSINGCODE=(""1_Pack"",""20""),(""2_Packs"",""40""),(""3_Packs"",""60"")"
+e_working,testing_form,,text,Example - Working w/ Charlimit,,,,,,,,,,,,, @MISSINGCODE=DK @CHARLIMIT=4
+e_broken,testing_form,,text,Example - Broken w/ Charlimit,,,,,,,,,,,,, @CHARLIMIT=4 @MISSINGCODE=DK
+e_readonly,testing_form,Read Only,text,Read Only,,,,,,,,,,,,, @READONLY @MISSINGCODE=DK
+e_qutoes,testing_form,Symbols (quoted or not) work with custom text,text,"Using (""DK"")",,,,,,,,,,,,," @MISSINGCODE=(""DK""),(""Some_Stuff"",""woot"")"
+e_calc,testing_form,These Shouldn't Work,calc,Calc Field:,,,,,,,,,,,,," @MISSINGCODE=(""DK""),(""Some_Stuff"",""woot"")"
+e_dropdown,testing_form,,dropdown,Drop Down:,"1, foo | 2, woo",,,,,,,,,,,," @MISSINGCODE=(""DK""),(""Some_Stuff"",""woot"")"
+e_check,testing_form,,checkbox,CheckBox:,"1, example | 2, example",,,,,,,,,,,," @MISSINGCODE=(""DK""),(""Some_Stuff"",""woot"")"
+e_sig,testing_form,,file,Signature:,,,signature,,,,,,,,,," @MISSINGCODE=(""DK""),(""Some_Stuff"",""woot"")"
+e_file,testing_form,,file,File:,,,,,,,,,,,,," @MISSINGCODE=(""DK""),(""Some_Stuff"",""woot"")"
+e_slide,testing_form,,slider,Slider:,,,,,,,,,RH,,,," @MISSINGCODE=(""DK""),(""Some_Stuff"",""woot"")"
+e_desc,testing_form,,descriptive,Descriptive text,,,,,,,,,,,,," @MISSINGCODE=(""DK""),(""Some_Stuff"",""woot"")"
+e_sql,testing_form,,sql,SQL (blank):,,,,,,,,,RH,,,," @MISSINGCODE=(""DK""),(""Some_Stuff"",""woot"")"
+e_int_limit,testing_form,Data Validation Examples,text,Example - Int - Limit 0 to 5,,,integer,0,5,,,,,,,," @MISSINGCODE=DK,RF"
+e_numb_limit,testing_form,,text,Example - Number - Limit 0 to 5,,,number,0,5,,,,,,,, @MISSINGCODE=DK
+e_date,testing_form,,text,Example - Date,,,date_mdy,,,,,,,,,, @MISSINGCODE=DK
+e_datetime,testing_form,,text,Example - DateTime,,,datetime_mdy,,,,,,,,,, @MISSINGCODE=DK
+e_datetime_sec_ymd,testing_form,,text,Example - DateTime w/ Seconds YMD,,,datetime_seconds_ymd,,,,,,,,,, @MISSINGCODE=DK
+e_email,testing_form,,text,Example - Email,,,email,,,,,,,,,, @MISSINGCODE=DK
+e_zip,testing_form,,text,Example - Zip,,,zipcode,,,,,,,,,, @MISSINGCODE=DK
+e_phone,testing_form,,text,Example - Phone,,,phone,,,,,,,,,, @MISSINGCODE=DK
+e_time,testing_form,,text,Example - Time,,,time,,,,,,,,,, @MISSINGCODE=DK

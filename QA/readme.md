@@ -1,0 +1,1 @@
+These files may help you if you wish to perform QA on the plugin prior to deploying it in your instance of REDCap.
