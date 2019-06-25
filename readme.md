@@ -13,13 +13,13 @@ This [RedCap](https://www.project-redcap.org/) plugin adds the @MISSINGCODE acti
     or for advanced usage...
     @MISSINGCODE=(NA),("Custom_Text","999")
     
-                                none      zip           email         time    phone     date
-    NA | Not Applicable       | -6  | 99999-0006 | na@fake.wisc.edu | 00:00 |   X   | 01-01-1906
-    PF | Prefer not to answer | -7  | 99999-0007 | pf@fake.wisc.edu | 00:00 |   X   | 01-01-1907
-    RF | Refused              | -7  | 99999-0007 | rf@fake.wisc.edu | 00:00 |   X   | 01-01-1907
-    DC | Declined             | -7  | 99999-0007 | dc@fake.wisc.edu | 00:00 |   X   | 01-01-1907
-    DK | Don't Know           | -8  | 99999-0008 | dk@fake.wisc.edu | 00:00 |   X   | 01-01-1908
-    MS | Missing              | -9  | 99999-0009 | ms@fake.wisc.edu | 00:00 |   X   | 01-01-1909
+                                none      zip           email         time       phone         date
+    NA | Not Applicable       | -6  | 99999-0006 | na@fake.wisc.edu | 00:00 | 608-555-0106 | 01-01-1906
+    PF | Prefer not to answer | -7  | 99999-0007 | pf@fake.wisc.edu | 00:00 | 608-555-0107 | 01-01-1907
+    RF | Refused              | -7  | 99999-0007 | rf@fake.wisc.edu | 00:00 | 608-555-0107 | 01-01-1907
+    DC | Declined             | -7  | 99999-0007 | dc@fake.wisc.edu | 00:00 | 608-555-0107 | 01-01-1907
+    DK | Don't Know           | -8  | 99999-0008 | dk@fake.wisc.edu | 00:00 | 608-555-0108 | 01-01-1908
+    MS | Missing              | -9  | 99999-0009 | ms@fake.wisc.edu | 00:00 | 608-555-0109 | 01-01-1909
 
 
 Only ./framework/resources/missingCodes.php contains unique code, the rest is the stock [RedCap hooks framework](https://github.com/123andy/redcap-hook-framework) with line changes as needed to include this hook. These files are included for ease of install.
