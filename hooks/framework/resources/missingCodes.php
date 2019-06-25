@@ -177,13 +177,13 @@ $(document).ready(function() {
                                     codeStr = codeObj.date + " " + codeObj.time + ":00";
                                 break;
                                 case "date_ymd":
-                                    codeStr = codeObj.date.substr(6) + "/" + codeObj.date.substr(0,5);
+                                    codeStr = codeObj.date.substr(6) + "-" + codeObj.date.substr(0,5);
                                 break;
                                 case "datetime_ymd":
-                                    codeStr = codeObj.date.substr(6) + "/" + codeObj.date.substr(0,5) + " " + codeObj.time;
+                                    codeStr = codeObj.date.substr(6) + "-" + codeObj.date.substr(0,5) + " " + codeObj.time;
                                 break;
                                 case "datetime_seconds_ymd":
-                                    codeStr = codeObj.date.substr(6) + "/" + codeObj.date.substr(0,5) + " " + codeObj.time + ":00";
+                                    codeStr = codeObj.date.substr(6) + "-" + codeObj.date.substr(0,5) + " " + codeObj.time + ":00";
                                 break;
                                 default:
                                     codeStr = ""    
