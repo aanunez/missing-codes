@@ -11,13 +11,13 @@
     or for advanced usage...
     @MISSINGCODE=(NA),("Custom_Text","999")
     
-                                none      zip           email         time    phone     date
-    NA | Not Applicable       | -6  | 99999-0006 | na@fake.wisc.edu | 00:00 |   X   | 01-01-1906
-    PF | Prefer not to answer | -7  | 99999-0007 | pf@fake.wisc.edu | 00:00 |   X   | 01-01-1907
-    RF | Refused              | -7  | 99999-0007 | rf@fake.wisc.edu | 00:00 |   X   | 01-01-1907
-    DC | Declined             | -7  | 99999-0007 | dc@fake.wisc.edu | 00:00 |   X   | 01-01-1907
-    DK | Don't Know           | -8  | 99999-0008 | dk@fake.wisc.edu | 00:00 |   X   | 01-01-1908
-    MS | Missing              | -9  | 99999-0009 | ms@fake.wisc.edu | 00:00 |   X   | 01-01-1909
+                                none      zip           email         time       phone         date
+    NA | Not Applicable       | -6  | 99999-0006 | na@fake.wisc.edu | 00:00 | 608-555-0106 | 01-01-1906
+    PF | Prefer not to answer | -7  | 99999-0007 | pf@fake.wisc.edu | 00:00 | 608-555-0107 | 01-01-1907
+    RF | Refused              | -7  | 99999-0007 | rf@fake.wisc.edu | 00:00 | 608-555-0107 | 01-01-1907
+    DC | Declined             | -7  | 99999-0007 | dc@fake.wisc.edu | 00:00 | 608-555-0107 | 01-01-1907
+    DK | Don't Know           | -8  | 99999-0008 | dk@fake.wisc.edu | 00:00 | 608-555-0108 | 01-01-1908
+    MS | Missing              | -9  | 99999-0009 | ms@fake.wisc.edu | 00:00 | 608-555-0109 | 01-01-1909
 
 **/
 
@@ -124,12 +124,12 @@ $(document).ready(function() {
     var affected_fields = <?php print json_encode($hook_functions[$term]) ?>;
     $.each(affected_fields, function(field,args) {
         const template = '<div class="missingCodeButton"><button id="MC_FLD" class="btn btn-defaultrc btn-xs fsl1 CHKD" type="button" onclick="missingCodeClicked(\'MC\',\'FLD\',\'CODE\')">TITLE</button></div>';
-        const coding = [ {sym:"NA",code:-6,zipcode:"99999-0006",email:"na@fake.wisc.edu",time:"00:00",date:"01-01-1906",phone:"",text:"Not Applicable"},
-                         {sym:"PF",code:-7,zipcode:"99999-0007",email:"pf@fake.wisc.edu",time:"00:00",date:"01-01-1907",phone:"",text:"Prefer not to answer"},
-                         {sym:"RF",code:-7,zipcode:"99999-0007",email:"rf@fake.wisc.edu",time:"00:00",date:"01-01-1907",phone:"",text:"Refused"},
-                         {sym:"DC",code:-7,zipcode:"99999-0007",email:"dc@fake.wisc.edu",time:"00:00",date:"01-01-1907",phone:"",text:"Declined"},
-                         {sym:"DK",code:-8,zipcode:"99999-0008",email:"dk@fake.wisc.edu",time:"00:00",date:"01-01-1908",phone:"",text:"Don't Know"},
-                         {sym:"MS",code:-9,zipcode:"99999-0009",email:"ms@fake.wisc.edu",time:"00:00",date:"01-01-1909",phone:"",text:"Missing"} ]
+        const coding = [ {sym:"NA",code:-6,zipcode:"99999-0006",email:"na@fake.wisc.edu",time:"00:00",date:"01-01-1906",phone:"(608) 555-0106",text:"Not Applicable"},
+                         {sym:"PF",code:-7,zipcode:"99999-0007",email:"pf@fake.wisc.edu",time:"00:00",date:"01-01-1907",phone:"(608) 555-0107",text:"Prefer not to answer"},
+                         {sym:"RF",code:-7,zipcode:"99999-0007",email:"rf@fake.wisc.edu",time:"00:00",date:"01-01-1907",phone:"(608) 555-0107",text:"Refused"},
+                         {sym:"DC",code:-7,zipcode:"99999-0007",email:"dc@fake.wisc.edu",time:"00:00",date:"01-01-1907",phone:"(608) 555-0107",text:"Declined"},
+                         {sym:"DK",code:-8,zipcode:"99999-0008",email:"dk@fake.wisc.edu",time:"00:00",date:"01-01-1908",phone:"(608) 555-0108",text:"Don't Know"},
+                         {sym:"MS",code:-9,zipcode:"99999-0009",email:"ms@fake.wisc.edu",time:"00:00",date:"01-01-1909",phone:"(608) 555-0109",text:"Missing"} ]
         
         // Parse the input to the tag, format: [["DK"],["PS"],["button_text","code_value"]]
         temp = args.params.match(/\((.*?)\)/g)
