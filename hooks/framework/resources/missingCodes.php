@@ -64,7 +64,7 @@ function missingCodeClicked(missingItem, field, code) {
     // field - Name of field as seen on the dom. This is always the variable name.
     // code - Value to check for or write to the field.
     
-    missingItem = missingItem.replace(/[@%#!$`\\|!`()]/g,'');
+    missingItem = missingItem.replace(/[@%#!$`\\|!`()']/g,'');
     // The button that was already clicked was clicked again. Toggle it off
     if ($('#' + missingItem + '_' + field).hasClass("stateSelected")) {
         $('#' + missingItem + '_' + field).removeClass("stateSelected");
@@ -90,9 +90,8 @@ function injectCode( html, field, code ) {
     // html - The HTML string to be inserted
     // field - Name of field as seen on the dom. This is always the variable name.
     // code - Value to check for (we may need to highlight the button) and to insert into the html arg.
-    
-    html = html.replace(/CODE/g, (''+code).split("'").join("\\x27"));
 
+    html = html.replace(/CODE/g, (''+code).split("'").join("\\x27"));
     if ($('[name="' + field + '"]').val() == code) {
         html = html.replace(/CHKD/g, "stateSelected");
         $('[name="' + field + '"]').prop('readonly', true);
@@ -139,10 +138,9 @@ $(document).ready(function() {
         else { // Regex magic, a = "foo","woo" or "dk" or dk (no quotes)
             args = temp.map(s => s.slice(1,-1)).map( function(a) {
                 if(a.length == 2) return [a.toUpperCase()]; 
-                else return a.split(/,(?=(?:(?:[^'"]*(?:'|")){2})*[^'"]*$)/).map(s => s.slice(1,-1));
+                else return a.split(/,(?=(?:(?:[^"]*(?:")){2})*[^"]*$)/).map(s => s.slice(1,-1));
             });
         } 
-        
         // Loop through every pair of arguments 
         $.each(args.reverse(), function(_,arg) { 
             // Assume using the built in symbols
@@ -198,7 +196,7 @@ $(document).ready(function() {
             }
             // Assume using custom text & code ["Text","Code"]
             else if( (arg.length == 2) && !ignoreCheck( field )) {
-                injectCode( template.replace(/MC/g, arg[0].replace(/[@%#!$`\\|!`()]/g,'')).replace(/FLD/g, field).replace(/TITLE/g, arg[0].split("_").join(" ")), field, arg[1] );
+                injectCode( template.replace(/MC/g, arg[0].replace(/[@%#!$`\\|!`()']/g,'')).replace(/FLD/g, field).replace(/TITLE/g, arg[0].split("_").join(" ")), field, arg[1] );
             }
         });
     });
