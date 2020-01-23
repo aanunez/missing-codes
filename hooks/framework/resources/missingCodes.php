@@ -64,6 +64,7 @@ function missingCodeClicked(missingItem, field, code) {
     // field - Name of field as seen on the dom. This is always the variable name.
     // code - Value to check for or write to the field.
     
+    missingItem = missingItem.replace(/[@%#!$`\\|!`()]/g,'');
     // The button that was already clicked was clicked again. Toggle it off
     if ($('#' + missingItem + '_' + field).hasClass("stateSelected")) {
         $('#' + missingItem + '_' + field).removeClass("stateSelected");
@@ -197,7 +198,7 @@ $(document).ready(function() {
             }
             // Assume using custom text & code ["Text","Code"]
             else if( (arg.length == 2) && !ignoreCheck( field )) {
-                injectCode( template.replace(/MC/g, arg[0]).replace(/FLD/g, field).replace(/TITLE/g, arg[0].split("_").join(" ")), field, arg[1] );
+                injectCode( template.replace(/MC/g, arg[0].replace(/[@%#!$`\\|!`()]/g,'')).replace(/FLD/g, field).replace(/TITLE/g, arg[0].split("_").join(" ")), field, arg[1] );
             }
         });
     });

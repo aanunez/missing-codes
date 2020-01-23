@@ -31,7 +31,7 @@ Only ./framework/resources/missingCodes.php contains unique code, the rest is th
 * The tag works for both Text and Notes fields
 * There is no dodging RedCap's built in validation. If you enable validation on the field then your coded value must be within the specified range.
 * Please read the advanced usage section of the end-user help for info on custom button text and coding values.
-* Usage of `!` in the custom values for the tag will break the buttons.
+* See the end-user help for a list of special characters that have known issues.
 
 ## To Do
 
